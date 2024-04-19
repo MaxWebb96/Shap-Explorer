@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import ShapE from './ShapE';
 
 function App() {
   return (
@@ -18,7 +19,12 @@ function App() {
           Learn React
         </a>
       </header>
+      <div>
+            <ShapE />
+            {/* Add other components similarly */}
+        </div>
     </div>
+        
   );
 }
 
