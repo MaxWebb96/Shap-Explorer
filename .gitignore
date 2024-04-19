@@ -1,5 +1,1 @@
-shap-e/shap_e/__pycache__/
-.DS_Store
-*.egg-info/
-*.shap_e_model_cache/
-shap-e/shap_e/examples/shap_e_model_cache
+.shap-explorer/
