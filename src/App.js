@@ -15,9 +15,9 @@ import { controls } from './scripts/interactions';
 function App() {
   useEffect(() => {
     // Initialize the scene
-    setupScene(); 
-    setupPreviewer();
-    animate();
+    // setupScene(); 
+    // setupPreviewer();
+    // animate();
     
     // Example event binding
     const btnGenerate = document.getElementById('btn-generate');
