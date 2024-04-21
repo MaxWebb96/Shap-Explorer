@@ -1,12 +1,13 @@
 // manage previewer for 3D model
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 import { PLYLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/PLYLoader.js';
+import { renderer } from './sceneSetup';
 
 let previewScene, previewCamera, previewRenderer;
 let currentMesh;
 const previewerElement = document.getElementById('previewer');
 
-function setupPreviewer() {
+function setupPreviewer(element) {
 
     if (!previewerElement) {
         console.error('Previewer element not found.');
@@ -31,6 +32,16 @@ function setupPreviewer() {
     previewScene.add(directionalLight);
 
     loadPLYFileToPreviewer(); // Load the PLY file
+    if (!previewScene || !previewCamera || !previewRenderer) {
+        console.error("Failed to initialize the 3D scene properly.");
+        return {};
+    }
+
+    // Return the necessary objects
+    return {
+        renderer: previewRenderer,
+        mesh: currentMesh // Assuming currentMesh is initialized somewhere within this function
+    };
 }
 
 let angle = 0; // Initialize angle for rotation

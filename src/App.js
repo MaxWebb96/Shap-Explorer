@@ -34,9 +34,9 @@ function App() {
             </div>
 
             <div className = "toolbar">
-              <div>
+              {/* <div>
                 <Previewer />
-              </div>
+              </div> */}
             <input 
                 type="text" 
                 value={promptText} 
