@@ -1,51 +1,63 @@
-import logo from './logo.svg';
 import './App.css';
-import ShapE from './ShapE';
-import { useEffect } from 'react';
+import ThreeScene from './ThreeScene';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 
-import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 // import { OBJLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/OBJLoader.js';
 import { PLYLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/PLYLoader.js';
 import axios from 'https://cdn.skypack.dev/axios';
+import Previewer from './Previewer';
 
-import { setupScene, animate, scene } from './scripts/sceneSetup';
-import { setupPreviewer } from './scripts/setupPreviewer';
-import { controls } from './scripts/interactions';
+// import { setupPreviewer } from './scripts/setupPreviewer';
+// import { controls } from './scripts/interactions';
 
 function App() {
-  useEffect(() => {
-    // Initialize the scene
-    // setupScene(); 
-    // setupPreviewer();
-    // animate();
-    
-    // Example event binding
-    const btnGenerate = document.getElementById('btn-generate');
-    btnGenerate.addEventListener('click', generateHandler);
+  const [promptText, setPromptText] = useState('');
+  const [guidanceScale, setGuidanceScale] = useState(1);
 
-    return () => {
-      btnGenerate.removeEventListener('click', generateHandler);
+    const handleGenerateClick = () => {
+        // loadPLYFromAPI(promptText, guidanceScale, loadPLYtoPreviewer);
     };
-  }, []);
 
-  const generateHandler = (event) => {
-    event.preventDefault();
-    // Logic for button click
-  };
+    const handleAreaGeneratingClick = () => {
+        // Assuming you have defined these functions and states elsewhere
+        // setIsSelectionModeActive(true);
+        // controls.enabled = false;
+        // enableSelectionListeners();
+    };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        Shap-Explorer
-      </header>
+          <div>
+            Shap-Explorer 1.0
+            <div>
+                <ThreeScene />
+            </div>
 
-      <div>
-            <ShapE />
-            {/* Add other components similarly */}
+            <div className = "toolbar">
+              <div>
+                <Previewer />
+              </div>
+            <input 
+                type="text" 
+                value={promptText} 
+                onChange={e => setPromptText(e.target.value)}
+                placeholder="Enter your prompt"
+            />
+            <input 
+                type="number" 
+                defaultValue={16}
+                value={guidanceScale} 
+                onChange={e => setGuidanceScale(e.target.value)}
+                placeholder="Enter your guidance scale"
+            />
+            <button onClick={handleGenerateClick}>Generate</button>
+            <button onClick={handleAreaGeneratingClick}>Area Generating</button>
+            
+            </div>
         </div>
-    </div>
         
   );
 }
+ReactDOM.render(<App />, document.getElementById('root'));
 
 export default App;

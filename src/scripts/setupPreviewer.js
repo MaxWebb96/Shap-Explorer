@@ -7,6 +7,11 @@ let currentMesh;
 const previewerElement = document.getElementById('previewer');
 
 function setupPreviewer() {
+
+    if (!previewerElement) {
+        console.error('Previewer element not found.');
+        return;
+    }
     previewScene = new THREE.Scene();
     previewScene.background = new THREE.Color(0xaaaaaa);
 
@@ -123,6 +128,9 @@ function LoadMeshToPreviewer(mesh) {
 };
 
 function onWindowResize() {
+    if (!previewerElement || !previewCamera || !previewRenderer) {
+        return;
+    }
     previewCamera.aspect = previewerElement.clientWidth / previewerElement.clientHeight;
     previewCamera.updateProjectionMatrix();
     previewRenderer.setSize(previewerElement.clientWidth, previewerElement.clientHeight);
@@ -132,4 +140,4 @@ window.addEventListener('resize', onWindowResize);
 
 
 
-export { setupPreviewer, LoadMeshToPreviewer, loadPLYFileToPreviewer, currentMesh };
+export { setupPreviewer, LoadMeshToPreviewer, loadPLYFileToPreviewer, currentMesh, previewRenderer };
